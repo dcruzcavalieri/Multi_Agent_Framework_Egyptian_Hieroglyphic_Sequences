@@ -1,37 +1,37 @@
-# Análise de Jeroglíficos Egípcios com LangGraph
+# Egyptian Hieroglyphic Analysis with LangGraph
 
-Este projeto implementa um sistema multi-agente para análise de determinativos em jeroglíficos egípcios, utilizando LangGraph e LLMs (OpenAI/Anthropic).
+This project implements a multi-agent system for deterministic and contextual analysis of Egyptian hieroglyphic sequences using LangGraph and LLMs (OpenAI/Anthropic).
 
-## Pré-requisitos
+## Prerequisites
 
-Certifique-se de ter o Python instalado (recomendado 3.10+).
+Ensure you have Python installed (3.10+ recommended).
 
-### Dependências
+### Dependencies
 
-Instale as bibliotecas necessárias:
+Install the required libraries:
 
 ```bash
 pip install pandas numpy matplotlib openpyxl python-dotenv langgraph langchain-openai langchain-anthropic langchain-core
 ```
 
-## Configuração
+## Configuration
 
-1. Clone o repositório ou baixe o arquivo `agente_egipsio_langgraph_v1_28.py`.
-2. Crie um arquivo chamado `.env` na mesma pasta do código.
-3. Adicione sua chave de API da OpenAI (ou Anthropic) no arquivo `.env`:
+1. Clone this repository or download the `agente_egipsio_langgraph_v1_28.py` file.
+2. Create a file named `.env` in the same directory as the script.
+3. Add your OpenAI (or Anthropic) API key to the `.env` file:
 
    ```env
    OPENAI_API_KEY=sk-...
    ```
 
-4. Certifique-se de que o arquivo de dados `extractrion_for_agents.xlsx` esteja no caminho esperado pelo código ou ajuste a variável `DATA_PATH` no script.
+4. **Note on Data Path**: By default, the script points to a specific Excel file path (`E:/estancia_espanha_agentes/content/extractrion_for_agents.xlsx`). Please update the `DATA_PATH` variable in the script to match your local file location.
 
-## Como Executar
+## How to Run
 
-Execute o script principal:
+Execute the main script:
 
 ```bash
 python agente_egipsio_langgraph_v1_28.py
 ```
 
-O script realizará a análise baseada em regras por padrão e, se uma chave de API for detectada, utilizará o LangGraph para uma análise contextual mais sofisticada.
+The script will perform rule-based analysis by default. If an API key is detected, it will automatically use LangGraph for a more sophisticated contextual analysis.
