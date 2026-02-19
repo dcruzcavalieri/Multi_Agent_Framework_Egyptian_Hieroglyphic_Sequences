@@ -2,6 +2,12 @@
 
 This project implements a multi-agent system for deterministic and contextual analysis of Egyptian hieroglyphic sequences using LangGraph and LLMs (OpenAI/Anthropic).
 
+## Workflow & Architecture
+
+The following diagram illustrates the multi-agent framework and the logic flow for determinative detection:
+
+![System Architecture](diagrams/multi_agent_architecture_diagram.png)
+
 ## Prerequisites
 
 Ensure you have Python installed (3.10+ recommended).
