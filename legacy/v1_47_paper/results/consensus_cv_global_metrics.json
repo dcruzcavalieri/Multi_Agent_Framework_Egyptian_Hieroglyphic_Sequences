@@ -1,0 +1,19 @@
+{
+  "version": "v1.36_consensus_cv",
+  "strategy": "B_leave_one_fold_out_consensus",
+  "guidance_base": "v1.35_strict_agent_specific",
+  "aggregate": {
+    "llm_macro_f1": {
+      "mean": 0.8184,
+      "std": 0.0524
+    },
+    "llm_micro_f1": {
+      "mean": 0.872,
+      "std": 0.0386
+    },
+    "fast_macro_f1": {
+      "mean": 0.8703,
+      "std": 0.0424
+    }
+  }
+}

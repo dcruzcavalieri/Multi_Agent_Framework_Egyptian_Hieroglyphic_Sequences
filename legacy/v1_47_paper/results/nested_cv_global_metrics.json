@@ -1,0 +1,78 @@
+{
+  "version": "v1.39_nested_cv",
+  "n_outer_folds": 5,
+  "outer_n_splits": 5,
+  "inner_n_reps": 5,
+  "aggregate": {
+    "val_f1_mean": {
+      "mean": 0.9042,
+      "std": 0.0087,
+      "min": 0.8973,
+      "max": 0.9205
+    },
+    "val_f1_std": {
+      "mean": 0.0143,
+      "std": 0.0058,
+      "min": 0.0063,
+      "max": 0.0236
+    },
+    "llm_macro_f1": {
+      "mean": 0.8194,
+      "std": 0.0219,
+      "min": 0.7762,
+      "max": 0.8354
+    },
+    "llm_macro_p": {
+      "mean": 0.872,
+      "std": 0.0278,
+      "min": 0.834,
+      "max": 0.9199
+    },
+    "llm_macro_r": {
+      "mean": 0.8672,
+      "std": 0.0507,
+      "min": 0.7925,
+      "max": 0.9442
+    },
+    "llm_micro_f1": {
+      "mean": 0.875,
+      "std": 0.025,
+      "min": 0.8296,
+      "max": 0.9009
+    },
+    "llm_macro_classic_f1": {
+      "mean": 0.8098,
+      "std": 0.0184,
+      "min": 0.7762,
+      "max": 0.8269
+    },
+    "fast_macro_f1": {
+      "mean": 0.8703,
+      "std": 0.0424,
+      "min": 0.8091,
+      "max": 0.9204
+    },
+    "fast_micro_f1": {
+      "mean": 0.9063,
+      "std": 0.0253,
+      "min": 0.8611,
+      "max": 0.9358
+    },
+    "baseline_macro_f1": {
+      "mean": 0.851,
+      "std": 0.0435,
+      "min": 0.7829,
+      "max": 0.9019
+    },
+    "baseline_micro_f1": {
+      "mean": 0.8768,
+      "std": 0.0234,
+      "min": 0.8392,
+      "max": 0.9107
+    },
+    "generalization_gap": {
+      "mean": -0.0848,
+      "std": 0.0303
+    }
+  }
+}

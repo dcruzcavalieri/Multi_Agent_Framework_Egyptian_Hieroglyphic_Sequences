@@ -1,43 +1,54 @@
-# Egyptian Hieroglyphic Analysis with LangGraph
+# Multi-Agent Framework for Determinative Detection in Egyptian Hieroglyphic Sequences
 
-This project implements a multi-agent system for deterministic and contextual analysis of Egyptian hieroglyphic sequences using LangGraph and LLMs (OpenAI/Anthropic).
+Code and benchmark for the manuscript:
 
-## Workflow & Architecture
+> D. Cruz-Cavalieri, C. Gracia-Zamacona, J. Grotenhuis, S. E. Palazuelos-Cagigas, P. S. dos Santos-Junior.
+> *Determinative Detection in Egyptian Hieroglyphic Sequences: A Sequence-Labelling Benchmark and
+> Multi-Agent LLM Baseline.* Submitted to *Language Resources and Evaluation*.
 
-The following diagram illustrates the multi-agent framework and the logic flow for determinative detection:
+Instituto Federal do Espírito Santo (IFES, Brazil) and Universidad de Alcalá (UAH, Spain).
+Dataset archive: [10.5281/zenodo.21776840](https://doi.org/10.5281/zenodo.21776840).
 
-![System Architecture](diagrams/multi_agent_architecture_diagram.png)
+## What is here
 
-## Prerequisites
+| Path | Content |
+|---|---|
+| `legacy/v1_47_paper/` | **Exact code behind the manuscript** (`agente_egipsio_langgraph_v1_47.py`), the original result files, and an offline reproduction script for the rule-only path |
+| `data/raw/` | Corpus (533 MdC sequences with transliteration and translation) and the expert annotations of 99 sequences (determinatives marked in bold) |
+| `docs/diagrams/` | Architecture and workflow diagrams |
+| `legacy/v1_28_initial_github/` | The script previously published in this repository (superseded) |
+| `configs/`, `src/egydet/`, `tests/` | Modular v2 implementation (in progress) |
 
-Ensure you have Python installed (3.10+ recommended).
+The git tag **`v1.47-paper`** marks the state of the code that produced the reported results.
 
-### Dependencies
+## Reported results (nested 5-fold CV, inner 5x2 CV, 99 sequences)
 
-Install the required libraries:
+| Metric | Macro | Micro |
+|---|---|---|
+| F1 | 81.94 ± 2.19 | 87.50 ± 2.50 |
+| Precision | 87.20 ± 2.78 | 88.19 ± 0.51 |
+| Recall | 86.72 ± 5.07 | 87.01 ± 5.19 |
 
-```bash
-pip install pandas numpy matplotlib openpyxl python-dotenv langgraph langchain-openai langchain-anthropic langchain-core
-```
+LLM: OpenAI `gpt-5.4-nano`, `temperature=0`, `top_p=1`, `seed=42`. Source: `legacy/v1_47_paper/results/`.
 
-## Configuration
-
-1. Clone this repository or download the `agente_egipsio_langgraph_v1_28.py` file.
-2. Create a file named `.env` in the same directory as the script.
-3. Add your OpenAI (or Anthropic) API key to the `.env` file:
-
-   ```env
-   OPENAI_API_KEY=sk-...
-   ```
-
-4. **Note on Data Path**: By default, the script points to a specific Excel file path (`E:/estancia_espanha_agentes/content/extractrion_for_agents.xlsx`). Please update the `DATA_PATH` variable in the script to match your local file location.
-
-## How to Run
-
-Execute the main script:
+## Running the paper version
 
 ```bash
-python agente_egipsio_langgraph_v1_28.py
+pip install pandas numpy matplotlib seaborn openpyxl python-docx python-dotenv optuna \
+            langgraph langchain-core langchain-openai langchain-anthropic
 ```
 
-The script will perform rule-based analysis by default. If an API key is detected, it will automatically use LangGraph for a more sophisticated contextual analysis.
+The script is a single Spyder-style file with hard-coded paths (`DATA_PATH`, `OUTPUT_DIR`, `DOCX_PATHS`,
+around line 2946). Point them to `data/raw/`, put `OPENAI_API_KEY` in a `.env` file next to the script
+(see `.env.example`), and run it. Without an API key it falls back to the rule-only path.
+
+Offline check of the rule-only path against the archived results (no API key needed):
+
+```bash
+python legacy/v1_47_paper/repro_rule_path.py baseline   # seconds
+python legacy/v1_47_paper/repro_rule_path.py fold1      # ~3 min, runs Optuna for outer fold 1
+```
+
+## Status
+
+The v1.47 code is frozen at tag `v1.47-paper`. Further development happens in the modular v2 package.

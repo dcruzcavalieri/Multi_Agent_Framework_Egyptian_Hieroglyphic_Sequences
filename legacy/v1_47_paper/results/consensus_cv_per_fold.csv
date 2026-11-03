@@ -1,0 +1,6 @@
+outer_fold,strategy,n_test,llm_macro_f1,llm_micro_f1,fast_macro_f1,null_accuracy
+1,B_consensus,20,0.7456,0.8,0.8091,
+2,B_consensus,20,0.8989,0.9147,0.9103,1.0
+3,B_consensus,20,0.8404,0.8727,0.9204,1.0
+4,B_consensus,20,0.7811,0.8889,0.837,0.5
+5,B_consensus,19,0.8259,0.8837,0.8746,0.6667
