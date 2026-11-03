@@ -15,9 +15,13 @@ def load_v147(*names: str, constants: tuple = ()) -> dict:
     for node in tree.body:
         if isinstance(node, ast.FunctionDef) and node.name in names:
             keep.append(node)
-        elif isinstance(node, ast.Assign) and any(
-                isinstance(t, ast.Name) and t.id in constants for t in node.targets):
+        elif isinstance(node, (ast.Assign, ast.AnnAssign)) and any(
+                isinstance(t, ast.Name) and t.id in constants
+                for t in (node.targets if isinstance(node, ast.Assign) else [node.target])):
             keep.append(node)
-    ns = {"re": re, "List": list, "Dict": dict}
+        elif isinstance(node, ast.For) and "PARAM_SPACE" in constants and "CONTEXT_SIGNS_TO_OPTIMIZE" in ast.unparse(node.iter):
+            keep.append(node)
+    import typing
+    ns = {"re": re, **{n: getattr(typing, n) for n in ("List", "Dict", "Any", "Tuple", "Optional", "Set")}}
     exec(compile(ast.Module(body=keep, type_ignores=[]), V147, "exec"), ns)
     return ns

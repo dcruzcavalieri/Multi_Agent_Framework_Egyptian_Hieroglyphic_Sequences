@@ -53,3 +53,21 @@ def tokenize(mdc: str) -> List[Token]:
         elif start is None:
             start = i
     return tokens
+
+
+def tokenize_with_separators(mdc: str) -> List[str]:
+    """Sign tokens *and* separators, exactly as v1.47 ``tokenize_mdc`` (used by the structure builder)."""
+    s = normalize(mdc)
+    out: List[str] = []
+    buff = ""
+    for ch in s:
+        if ch in SEPARATORS:
+            if buff:
+                out.append(buff)
+                buff = ""
+            out.append(ch)
+        else:
+            buff += ch
+    if buff:
+        out.append(buff)
+    return out

@@ -1,0 +1,283 @@
+_note: 'Exported verbatim from v1.47 (2026-11-03). Lists are sets: order has no meaning. Changes to Egyptological
+  content require sign-off by the domain experts.'
+tiers:
+  phonogram_strict:
+  - G17
+  - N35
+  - S29
+  phonogram_primary:
+  - D21
+  - G43
+  - M17
+  - U7
+  - V28
+  - V31
+  - V4
+  context_vessel:
+  - W22
+  - W23
+  - W24
+  context_divine:
+  - R7
+  - R8
+  context_vision:
+  - D4
+  context_bovine:
+  - F4
+  context_aquatic:
+  - K1
+  context_food:
+  - X1
+  context_animal:
+  - I10
+  - I5
+  - I6
+  - I9
+  context_insect:
+  - L1
+  - L2
+  context_tool:
+  - U1
+  - U6
+  context_body_action:
+  - D56
+  - D58
+  reliable:
+  - A1
+  - A24
+  - A40
+  - Aa2
+  - B1
+  - E1
+  - G40
+  - I14
+  - N1
+  - O31
+  - O49
+  - P1
+  - Q5
+  - T14
+  plural_functional:
+  - Z1
+  - Z2
+  - Z3
+semantic_fields:
+  vessel:
+  - Aa1
+  - W22
+  - W23
+  - W24
+  - X4
+  - beer
+  - bread
+  - offering
+  - oil
+  - water
+  - wine
+  divine:
+  - A40
+  - B1
+  - C12
+  - R7
+  - R8
+  - deity
+  - divine
+  - god
+  - goddess
+  - sacred
+  - temple
+  vision:
+  - D4
+  - eye
+  - look
+  - observe
+  - perceive
+  - see
+  - watch
+  bovine:
+  - E1
+  - F4
+  - bovine
+  - bull
+  - cattle
+  - cow
+  - ox
+  aquatic:
+  - K1
+  - canal
+  - fish
+  - fishing
+  - river
+  - water
+  food:
+  - X1
+  - bread
+  - eat
+  - food
+  - meal
+  - offering
+  animal:
+  - E1
+  - E23
+  - I10
+  - I5
+  - I6
+  - I9
+  - animal
+  - beast
+  - cobra
+  - reptile
+  - serpent
+  - snake
+  insect:
+  - L1
+  - L2
+  - amulet
+  - beetle
+  - divine
+  - holy
+  - religious
+  - sacred
+  - scarab
+  tool:
+  - T14
+  - T15
+  - U1
+  - U6
+  - agriculture
+  - farming
+  - harvest
+  - hoe
+  - plow
+  - sickle
+  - tool
+  body_action:
+  - D54
+  - D56
+  - D58
+  - advance
+  - foot
+  - go
+  - leg
+  - move
+  - travel
+  - walk
+strict_context_signs:
+- D4
+- F4
+- I10
+- I5
+- I6
+- I9
+- K1
+- L1
+- L2
+- X1
+recently_added:
+  critical:
+  - I10
+  - I9
+  - L1
+  minor:
+  - D58
+  - I5
+  - I6
+  - L2
+  - U1
+  all:
+  - A14
+  - A28
+  - A50
+  - A7
+  - D56
+  - D57
+  - D58
+  - E23
+  - E34
+  - F51
+  - F52
+  - F53
+  - I10
+  - I5
+  - I6
+  - I9
+  - L1
+  - L2
+  - N16
+  - N23
+  - N24
+  - N26
+  - N27
+  - N28
+  - N29
+  - O38
+  - O39
+  - O40
+  - O41
+  - O43
+  - O44
+  - O45
+  - P1
+  - P2
+  - P3
+  - P4
+  - P6
+  - P8
+  - R7
+  - S12
+  - T14
+  - T15
+  - T16
+  - T17
+  - T19
+  - T20
+  - U1
+  - U6
+  - V13
+  - V15
+  - W10
+  - W11
+  - X2
+  - X8
+  - Z6
+  - Z7
+strong_determinatives:
+- A1
+- A24
+- A35
+- A40
+- Aa2
+- B1
+- D20
+- N1
+- O31
+- O49
+- Q5
+- W9
+- X4
+- Z1
+- Z2
+- Z3
+plural_markers:
+- Z1
+- Z2
+- Z3
+final_location_signs:
+- O1
+- O49
+location_modifier_signs:
+- O31
+contextual_only_signs:
+- D4
+- F4
+- K1
+- R7
+- R8
+- W22
+- W23
+- W24
+- X1
+block_end_signs:
+- O1
+- O31
+- O49

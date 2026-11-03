@@ -16,9 +16,11 @@ Dataset archive: [10.5281/zenodo.21776840](https://doi.org/10.5281/zenodo.217768
 | `legacy/v1_47_paper/` | **Exact code behind the manuscript** (`agente_egipsio_langgraph_v1_47.py`), the original result files, and an offline reproduction script for the rule-only path |
 | `data/raw/` | Corpus (533 MdC sequences with transliteration and translation) and the expert annotations of 99 sequences (determinatives marked in bold) |
 | `data/gold/gold_v1.jsonl` | Same 99 annotations in machine-readable form, with the token position of every determinative (built by `python -m egydet.gold.build`) |
+| `data/splits/v147_seed42.json` | The outer 5-fold and inner 5x2 cross-validation splits used for the manuscript, by sequence id |
+| `kb/` | Knowledge base (sign entries, sign categories, semantic fields) as YAML |
 | `docs/diagrams/` | Architecture and workflow diagrams |
 | `legacy/v1_28_initial_github/` | The script previously published in this repository (superseded) |
-| `configs/`, `src/egydet/`, `tests/` | Modular v2 implementation (in progress) |
+| `configs/`, `src/egydet/`, `tests/` | Modular v2 implementation (in progress; the rule-only path is complete and reproduces v1.47) |
 
 The git tag **`v1.47-paper`** marks the state of the code that produced the reported results.
 
@@ -57,5 +59,6 @@ The v1.47 code is frozen at tag `v1.47-paper`. Further development happens in th
 ```bash
 pip install -e ".[dev]"
 python -m egydet.gold.build    # rebuild data/gold/gold_v1.jsonl from data/raw
+python -m egydet.eval.cv       # nested CV of the rule-only scorer (about 20 min), results in runs/
 pytest -q
 ```

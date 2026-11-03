@@ -1,0 +1,266 @@
+_note: 'Scoring parameters of v1.47: search space and the two starting points used there.'
+context_signs:
+- W24
+- W22
+- W23
+- R8
+- R7
+- D4
+- F4
+- K1
+- X1
+- I9
+- I10
+- L1
+- L2
+- I5
+- I6
+- D58
+- D56
+- U1
+- U6
+param_space:
+  w_sem:
+  - 0.1
+  - 1.0
+  w_struct:
+  - 0.1
+  - 1.0
+  w_rule:
+  - 0.1
+  - 1.0
+  w_sem_llm:
+  - 0.05
+  - 0.7
+  w_struct_llm:
+  - 0.05
+  - 0.7
+  w_rule_llm:
+  - 0.05
+  - 0.7
+  bonus_2src:
+  - 0.0
+  - 0.2
+  bonus_3src:
+  - 0.0
+  - 0.15
+  bonus_final:
+  - 0.0
+  - 0.3
+  bonus_global_final:
+  - 0.0
+  - 0.2
+  bonus_near_end:
+  - 0.0
+  - 0.2
+  bonus_group_end:
+  - 0.0
+  - 0.15
+  bonus_reliable:
+  - 0.0
+  - 0.3
+  bonus_plural_marker:
+  - 0.0
+  - 0.2
+  bonus_plural_head:
+  - 0.0
+  - 0.2
+  bonus_strong_det:
+  - 0.0
+  - 0.2
+  penalty_phonogram_primary_mult:
+  - 0.1
+  - 1.0
+  penalty_phonetic_complement:
+  - 0.0
+  - 0.4
+  penalty_phonogram_nonfinal:
+  - 0.0
+  - 0.6
+  penalty_no_context_mult:
+  - 0.2
+  - 1.0
+  context_strength_boost:
+  - 0.0
+  - 0.4
+  penalty_recently_critical:
+  - 0.3
+  - 1.0
+  penalty_recently_minor:
+  - 0.5
+  - 1.0
+  penalty_recently_other:
+  - 0.7
+  - 1.0
+  penalty_contextual_span:
+  - 0.0
+  - 0.6
+  bonus_plural_span:
+  - 0.0
+  - 0.15
+  bonus_location_span:
+  - 0.0
+  - 0.2
+  bonus_location_modifier_span:
+  - 0.0
+  - 0.15
+  bonus_strong_det_span:
+  - 0.0
+  - 0.1
+  thresh_default_context:
+  - 0.5
+  - 0.99
+  thresh_W24:
+  - 0.5
+  - 0.99
+  thresh_W22:
+  - 0.5
+  - 0.99
+  thresh_W23:
+  - 0.5
+  - 0.99
+  thresh_R8:
+  - 0.5
+  - 0.99
+  thresh_R7:
+  - 0.5
+  - 0.99
+  thresh_D4:
+  - 0.5
+  - 0.99
+  thresh_F4:
+  - 0.5
+  - 0.99
+  thresh_K1:
+  - 0.5
+  - 0.99
+  thresh_X1:
+  - 0.5
+  - 0.99
+  thresh_I9:
+  - 0.5
+  - 0.99
+  thresh_I10:
+  - 0.5
+  - 0.99
+  thresh_L1:
+  - 0.5
+  - 0.99
+  thresh_L2:
+  - 0.5
+  - 0.99
+  thresh_I5:
+  - 0.5
+  - 0.99
+  thresh_I6:
+  - 0.5
+  - 0.99
+  thresh_D58:
+  - 0.5
+  - 0.99
+  thresh_D56:
+  - 0.5
+  - 0.99
+  thresh_U1:
+  - 0.5
+  - 0.99
+  thresh_U6:
+  - 0.5
+  - 0.99
+default:
+  w_sem: 0.38
+  w_struct: 0.34
+  w_rule: 0.28
+  bonus_2src: 0.08
+  bonus_3src: 0.06
+  bonus_final: 0.1
+  bonus_global_final: 0.06
+  bonus_near_end: 0.06
+  bonus_group_end: 0.04
+  bonus_reliable: 0.12
+  bonus_plural_marker: 0.05
+  bonus_plural_head: 0.07
+  bonus_strong_det: 0.08
+  penalty_phonogram_primary_mult: 0.4
+  penalty_phonetic_complement: 0.15
+  penalty_phonogram_nonfinal: 0.35
+  penalty_no_context_mult: 0.6
+  context_strength_boost: 0.2
+  penalty_recently_critical: 0.6
+  penalty_recently_minor: 0.75
+  penalty_recently_other: 0.85
+  penalty_contextual_span: 0.25
+  bonus_plural_span: 0.05
+  bonus_location_span: 0.06
+  bonus_location_modifier_span: 0.04
+  bonus_strong_det_span: 0.03
+  thresh_default_context: 0.75
+  thresh_W24: 0.75
+  thresh_W22: 0.75
+  thresh_W23: 0.75
+  thresh_R8: 0.75
+  thresh_R7: 0.75
+  thresh_D4: 0.85
+  thresh_F4: 0.85
+  thresh_K1: 0.8
+  thresh_X1: 0.7
+  thresh_I9: 0.9
+  thresh_I10: 0.9
+  thresh_L1: 0.85
+  thresh_L2: 0.8
+  thresh_I5: 0.8
+  thresh_I6: 0.8
+  thresh_D58: 0.82
+  thresh_D56: 0.8
+  thresh_U1: 0.78
+  thresh_U6: 0.78
+flat:
+  w_sem: 0.0
+  w_struct: 0.0
+  w_rule: 1.0
+  w_sem_llm: 0.0
+  w_struct_llm: 0.0
+  w_rule_llm: 1.0
+  bonus_2src: 0.0
+  bonus_3src: 0.0
+  bonus_final: 0.0
+  bonus_global_final: 0.0
+  bonus_near_end: 0.0
+  bonus_group_end: 0.0
+  bonus_reliable: 0.0
+  bonus_plural_marker: 0.0
+  bonus_plural_head: 0.0
+  bonus_strong_det: 0.0
+  bonus_plural_span: 0.0
+  bonus_location_span: 0.0
+  bonus_location_modifier_span: 0.0
+  bonus_strong_det_span: 0.0
+  penalty_phonogram_primary_mult: 1.0
+  penalty_no_context_mult: 1.0
+  penalty_recently_critical: 1.0
+  penalty_recently_minor: 1.0
+  penalty_recently_other: 1.0
+  penalty_phonetic_complement: 0.0
+  penalty_phonogram_nonfinal: 0.0
+  penalty_contextual_span: 0.0
+  context_strength_boost: 0.0
+  thresh_default_context: 0.75
+  thresh_W24: 0.75
+  thresh_W22: 0.75
+  thresh_W23: 0.75
+  thresh_R8: 0.75
+  thresh_R7: 0.75
+  thresh_D4: 0.75
+  thresh_F4: 0.75
+  thresh_K1: 0.75
+  thresh_X1: 0.75
+  thresh_I9: 0.75
+  thresh_I10: 0.75
+  thresh_L1: 0.75
+  thresh_L2: 0.75
+  thresh_I5: 0.75
+  thresh_I6: 0.75
+  thresh_D58: 0.75
+  thresh_D56: 0.75
+  thresh_U1: 0.75
+  thresh_U6: 0.75

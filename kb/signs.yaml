@@ -1,0 +1,310 @@
+B1:
+  meaning: persona femenina
+  category: person
+  semantics: mujer, hermana, hija, sacerdotisa, sirvienta
+A1:
+  meaning: persona masculina
+  category: person
+  semantics: hombre, hermano, hijo, sacerdote, sirviente
+A2:
+  meaning: hombre con mano en la boca
+  category: action
+  semantics: comer, beber, hablar, pensar, sentir
+A40:
+  meaning: hombre con barba ceremonial
+  category: divine
+  semantics: dios, Horus, dios solar, señor
+A17:
+  meaning: niño
+  category: person
+  semantics: niño, huérfano, joven, pequeño
+A53:
+  meaning: momia erguida
+  category: abstract
+  semantics: momia, estatua, figura, forma, ser, semejarse
+D4:
+  meaning: ojo humano
+  category: body
+  semantics: ojo, ver, contemplar, soñar, vigilar
+D19:
+  meaning: ojo, nariz y mejilla
+  category: body
+  semantics: nariz, rostro, oler, alegría, amigable
+D40:
+  meaning: brazo con bastón
+  category: action
+  semantics: golpear, fuerte, fuerza, victorioso, trabajar, fabricar, artesano, hábil, tomar, capturar, robar, tocar,
+    ocultar
+D54:
+  meaning: pantorrilla y pies
+  category: action
+  semantics: ir, caminar, viajar, entrar, carrera, procesión
+  disambiguation: 'ONLY determinative in motion/travel contexts (ir, caminar, venir, entrar). Requires explicit
+    movement verb or travel concept in the sequence. NOT a determinative for general human figures, work actions,
+    or military contexts. When paired with A1/A24: the human figure (A1/A24) classifies the person, D54 classifies
+    the motion — both can coexist.'
+D3:
+  meaning: mechones de pelo
+  category: body
+  semantics: pelo, cabello, peluquero, peluca, viuda, luto, lamento, calvo
+Aa2:
+  meaning: pústula o glándula (?)
+  category: abstract
+  semantics: embalsamador, descomponerse, herida, dañino, malo
+E1:
+  meaning: ganado vacuno
+  category: animal
+  semantics: ganado vacuno, toro, vaca, ganado mayor
+E8:
+  meaning: cabrito
+  category: animal
+  semantics: cabrito, ganado menor
+F27:
+  meaning: piel
+  category: body
+  semantics: piel, cuero, piel animal, correa, taparrabos, ratón, gato
+G7:
+  meaning: halcón sobre estandarte
+  category: divine
+  semantics: dios, rey
+G39:
+  meaning: pato
+  category: animal
+  semantics: pato, ave, garza, langosta
+  disambiguation: EASILY CONFUSED with H8 (duck egg), A47 (shepherd with staff). G39 = swallow/duck bird, often
+    a logogram not determinative. Only accept as determinative in explicit bird/waterfowl context.
+G40:
+  meaning: pato cuchara volando
+  category: action
+  semantics: volar
+G37:
+  meaning: gorrión
+  category: abstract
+  semantics: pequeño, más joven, pobre, malo, enfermo, perecer, maldad
+I14:
+  meaning: serpiente
+  category: animal
+  semantics: serpiente, gusano
+K1:
+  meaning: pez
+  category: animal
+  semantics: pez
+M1:
+  meaning: árbol
+  category: nature
+  semantics: sicómoro, espino
+M2:
+  meaning: junco
+  category: nature
+  semantics: papiro, planta, flor, raíz
+M3:
+  meaning: rama
+  category: nature
+  semantics: ébano, caja, viga, mástil
+M33:
+  meaning: granos de cereal
+  category: nature
+  semantics: cereal, cebada, grano
+N5:
+  meaning: disco solar
+  category: sky
+  semantics: sol, salir, día, hora, tiempo
+N25:
+  meaning: colina
+  category: land
+  semantics: extranjero, desierto, montaña
+N33:
+  meaning: gránulo
+  category: material
+  semantics: arena, perla, mineral, gránulo, píldora
+N34:
+  meaning: barra de metal
+  category: material
+  semantics: bronce, hierro, espejo, daga
+N35A:
+  meaning: líneas de agua
+  category: nature
+  semantics: agua, líquido, lavar, beber
+N36:
+  meaning: sección de canal
+  category: nature
+  semantics: río, lago, canal
+O1:
+  meaning: plano de casa
+  category: building
+  semantics: casa, edificio, localidad, dominio, estate
+  disambiguation: 'POSITION-DEPENDENT (v1.38 fix): O1 at INDEX 0-1 = LOGOGRAM (it IS the word house/estate as subject),
+    REJECT as determinative. O1 at INDEX >= 2 (middle or end) = POSSIBLE DETERMINATIVE for building/estate/domain
+    words. When O1 appears after phonetic signs mid-sequence, it may classify the word domain/temple/estate.'
+Y1:
+  meaning: rollo de papiro
+  category: abstract
+  semantics: rollo de libro, documento escrito, decreto, suma, número, palabra, cosa, hechizo, magia, saber, poder
+Z2:
+  meaning: tres trazos
+  category: grammar
+  semantics: pluralidad
+A12:
+  meaning: soldado con arco
+  category: person
+  semantics: ejército, tropas
+E17:
+  meaning: chacal
+  category: animal
+  semantics: chacal
+F4:
+  meaning: cabeza de toro
+  category: body
+  semantics: parte delantera, frente, príncipe, cuerda de proa
+F21:
+  meaning: oreja
+  category: body
+  semantics: oír, obedecer
+L2:
+  meaning: abeja
+  category: animal
+  semantics: abeja, miel, rey de Bajo Egipto
+L1:
+  meaning: escarabajo
+  category: animal
+  semantics: llegar a ser, surgir, transformarse
+N1:
+  meaning: cielo
+  category: sky
+  semantics: cielo
+N11:
+  meaning: luna creciente
+  category: sky
+  semantics: luna
+N14:
+  meaning: estrella
+  category: sky
+  semantics: estrella, alabar, enseñar
+O42:
+  meaning: cercado rectangular
+  category: action
+  semantics: agarrar, asir
+R8:
+  meaning: bandera sobre bastón (dios)
+  category: divine
+  semantics: dios, diosa, alabar a dios, agradecer
+S34:
+  meaning: ankh (vida)
+  category: abstract
+  semantics: vivir, vida, los vivientes, juramento, espejo
+T18:
+  meaning: cayado
+  category: object
+  semantics: seguir, partidario, acompañante
+  disambiguation: CONTEXT-DEPENDENT. Only determinative for follower/adherent/companion words. Often a logogram
+    not a determinative. REJECT in general human activity contexts.
+P5B:
+  meaning: barco (variante)
+  category: transport
+  semantics: navegación, viaje por agua, barca
+V1:
+  meaning: lazo
+  category: object
+  semantics: lazo, unir, atar, cien mil
+  disambiguation: HIGHLY AMBIGUOUS — default = phonogram/numeral (100,000). Only accept as determinative in explicit
+    binding/tying contexts. REJECT unless strong binding context is present.
+A193:
+  meaning: persona (variante)
+  category: person
+  semantics: persona, agente, variante de A1
+O36:
+  meaning: muro alto con abertura
+  category: building
+  semantics: fortaleza, castillo, muro
+A7A:
+  meaning: persona sentada (variante)
+  category: person
+  semantics: persona, variante
+A24:
+  meaning: hombre con brazo extendido
+  category: person
+  semantics: acción con el brazo, golpear
+A35:
+  meaning: hombre construyendo
+  category: person
+  semantics: constructor, trabajador, construir
+D20:
+  meaning: nariz
+  category: body
+  semantics: nariz, oler, respirar, alegría
+W24:
+  meaning: taza
+  category: object
+  semantics: vaso, recipiente, ofrecer
+X4:
+  meaning: pan
+  category: food
+  semantics: pan, ofrenda
+Y2:
+  meaning: papiro enrollado
+  category: abstract
+  semantics: libro, documento, palabra escrita
+Q5:
+  meaning: sarcófago
+  category: funeral
+  semantics: sarcófago, ataúd, muerte
+Aa3:
+  meaning: rosto humano (variante)
+  category: body
+  semantics: rosto, face, expressão, presença
+E21:
+  meaning: cão/chacal deitado
+  category: animal
+  semantics: cão, chacal, Anúbis, animal doméstico, guarda
+  disambiguation: 'V1.38: REQUIRES explicit canine or Anubis-worship context. Only accept when sequence is specifically
+    about dogs, jackals, or Anubis. Do NOT predict as a generic animal classifier for non-canine contexts.'
+N31:
+  meaning: estrada com árvores
+  category: land
+  semantics: estrada, caminho, viajar, percurso, deserto
+X3:
+  meaning: bolo de pão redondo
+  category: food
+  semantics: pão, alimento, ofrenda, comida
+  disambiguation: 'V1.38: Only determinative in explicit offering lists with multiple food items. REJECT in general
+    ritual sequences where bread is implied but not the main classifier.'
+X6:
+  meaning: grande pão redondo
+  category: food
+  semantics: pão, ofrenda, alimento ritual
+  disambiguation: 'V1.38: Same as X3 — only in explicit offering lists. REJECT in sequences about general rituals
+    or activities.'
+F51:
+  meaning: pedaço de carne com sangue
+  category: body
+  semantics: carne, sangue, açougueiro, sacrifício, corpo
+N16:
+  meaning: terreno cultivado
+  category: land
+  semantics: terra, campo, parcela, agricultura
+  disambiguation: SIMILAR TO N24 (pool/marshland). N16 = dry cultivated field. N24 = pool/canal with water. Do NOT
+    predict N16 when the word is about water or pools.
+N23:
+  meaning: canal com água
+  category: land
+  semantics: canal, irrigação, água, rego
+T14:
+  meaning: machado de guerra
+  category: tool
+  semantics: machado, arma, guerra, combate, cortar
+P1:
+  meaning: barco
+  category: transport
+  semantics: barco, embarcação, navegar, rio, viagem
+O38:
+  meaning: canto de edifício
+  category: building
+  semantics: canto, ângulo, edifício, construção
+D56:
+  meaning: perna e pé
+  category: action
+  semantics: perna, caminhar, ir, mover-se
+Z6:
+  meaning: três traços (variante)
+  category: grammar
+  semantics: plural, múltiplo
