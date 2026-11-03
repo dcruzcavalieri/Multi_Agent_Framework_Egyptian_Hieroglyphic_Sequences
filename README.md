@@ -15,6 +15,7 @@ Dataset archive: [10.5281/zenodo.21776840](https://doi.org/10.5281/zenodo.217768
 |---|---|
 | `legacy/v1_47_paper/` | **Exact code behind the manuscript** (`agente_egipsio_langgraph_v1_47.py`), the original result files, and an offline reproduction script for the rule-only path |
 | `data/raw/` | Corpus (533 MdC sequences with transliteration and translation) and the expert annotations of 99 sequences (determinatives marked in bold) |
+| `data/gold/gold_v1.jsonl` | Same 99 annotations in machine-readable form, with the token position of every determinative (built by `python -m egydet.gold.build`) |
 | `docs/diagrams/` | Architecture and workflow diagrams |
 | `legacy/v1_28_initial_github/` | The script previously published in this repository (superseded) |
 | `configs/`, `src/egydet/`, `tests/` | Modular v2 implementation (in progress) |
@@ -52,3 +53,9 @@ python legacy/v1_47_paper/repro_rule_path.py fold1      # ~3 min, runs Optuna fo
 ## Status
 
 The v1.47 code is frozen at tag `v1.47-paper`. Further development happens in the modular v2 package.
+
+```bash
+pip install -e ".[dev]"
+python -m egydet.gold.build    # rebuild data/gold/gold_v1.jsonl from data/raw
+pytest -q
+```
