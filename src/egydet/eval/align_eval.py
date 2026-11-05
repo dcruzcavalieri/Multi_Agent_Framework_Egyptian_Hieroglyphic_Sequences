@@ -7,6 +7,11 @@ Veto: a predicted determinative is removed when the alignment gives its sign a p
 applied to the outer-fold test predictions as they are (rules: fold parameters of the rule-only run;
 fusion: the configuration chosen by the inner CV in ``egydet.eval.fusion``). Uses the experts'
 transliteration, i.e. the annotation-assistant setting (input = MdC + transliteration + translation).
+
+Slot rescue (with a verifier run): a determinative slot of the alignment (an unexplained sign at the end
+of a word, see ``egydet.rules.align``) is added when the verifier gives it p >= ``--theta`` (0.5, fixed
+in advance). The alignment says where a determinative can stand; the agent says whether one does.
+Slots alone have low precision (about 16% outside the rule output), so they are never added unconfirmed.
 """
 from __future__ import annotations
 
@@ -24,19 +29,27 @@ from egydet.rules.align import DEFAULT_TABLE, align, load_table
 
 
 def phonetic_positions(gold: List[dict], table: dict) -> Dict[str, set]:
+    return {i: v[0] for i, v in phonetic_and_slots(gold, table).items()}
+
+
+def phonetic_and_slots(gold: List[dict], table: dict) -> Dict[str, tuple]:
     out = {}
     for r in gold:
         a = align(r["tokens"], r["transliteration"], table)
-        out[r["id"]] = {i for i, (ro, v) in enumerate(zip(a["roles"], a["values"]))
-                        if ro == "phon" or (ro == "compl" and len(v) == 1)}
+        phon = {i for i, (ro, v) in enumerate(zip(a["roles"], a["values"]))
+                if ro == "phon" or (ro == "compl" and len(v) == 1)}
+        out[r["id"]] = (phon, set(a["slots"]))
     return out
 
 
-def run(verifier_run: Optional[str] = None, rules_run: Optional[str] = None, table_path: str = DEFAULT_TABLE) -> dict:
+def run(verifier_run: Optional[str] = None, rules_run: Optional[str] = None, table_path: str = DEFAULT_TABLE,
+        theta: float = 0.5) -> dict:
     from egydet.eval import fusion
     gold = load_gold(os.path.join(ROOT, "data", "gold", "gold_v1.jsonl"))
     G = {r["id"]: r for r in gold}
-    phon = phonetic_positions(gold, load_table(table_path))
+    ps = phonetic_and_slots(gold, load_table(table_path))
+    phon = {i: v[0] for i, v in ps.items()}
+    slots = {i: v[1] for i, v in ps.items()}
     rules_run = rules_run or latest_run()
     if verifier_run:
         res = fusion.run(verifier_run, rules_run)
@@ -55,6 +68,14 @@ def run(verifier_run: Optional[str] = None, rules_run: Optional[str] = None, tab
     preds = dict(base)
     for c, by_id in base.items():
         preds[c + "+align_veto"] = {i: [x for x in v if x not in phon[i]] for i, v in by_id.items()}
+    if verifier_run:
+        from egydet.agents.verifier import load_verifier
+        prob = load_verifier(verifier_run)
+        for c in ("rules_only", "fusion[both]"):
+            vetoed = preds[c + "+align_veto"]
+            preds[c + f"+align_veto+slot_p>={theta}"] = {
+                i: sorted(set(v) | {x for x in slots[i] if prob.get(i, {}).get(x, 0.0) >= theta})
+                for i, v in vetoed.items()}
     table = {}
     for c, by_id in preds.items():
         ag = aggregate([score_positions(by_id[i], G[i]["det_idx"]) for i in G])
@@ -66,16 +87,17 @@ def run(verifier_run: Optional[str] = None, rules_run: Optional[str] = None, tab
             key = "tp" if x in G[i]["det_idx"] else "fp"
             removed[key][G[i]["tokens"][x]] = removed[key].get(G[i]["tokens"][x], 0) + 1
     return {"verifier_run": _rel(verifier_run) if verifier_run else None, "rules_run": _rel(rules_run),
-            "table": table, "paired": paired_comparisons(preds, G), "veto_removed_from_rules": removed,
+            "table": os.path.basename(table_path),
+            "results": table, "paired": paired_comparisons(preds, G), "veto_removed_from_rules": removed,
             "predictions": preds}
 
 
 def to_markdown(res: dict) -> str:
-    L = ["# Phonetic alignment veto", "",
-         f"Verifier run: {res['verifier_run'] or 'none'}; positional metric over the 99 test predictions "
+    L = ["# Phonetic alignment veto and slot rescue", "",
+         f"Sign values: {res['table']}. Verifier run: {res['verifier_run'] or 'none'}; positional metric over the 99 test predictions "
          "(macro-F1 pooled over sequences).", "",
          "| Condition | Macro-F1 | TP | FP | FN |", "|---|---|---|---|---|"]
-    for c, t in res["table"].items():
+    for c, t in res["results"].items():
         L.append(f"| {c} | {100 * t['macro_f1']:.2f} | {t['tp']} | {t['fp']} | {t['fn']} |")
     L += ["", "| vs rules_only | Δ macro-F1 (pp) | 95% CI | better / worse | p (Holm) |", "|---|---|---|---|---|"]
     for c in sorted(res["paired"], key=lambda r: -r["macro_diff"]):
@@ -90,10 +112,12 @@ def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description="Phonetic alignment veto")
     ap.add_argument("--verifier-run", default=None)
     ap.add_argument("--rules-run", default=None)
-    ap.add_argument("--table", default=DEFAULT_TABLE)
+    ap.add_argument("--table", default=DEFAULT_TABLE,
+                    help="sign values (default: JSesh, phonogram values; kb/private/mdc_phonetic_values.json: MdC page)")
+    ap.add_argument("--theta", type=float, default=0.5, help="verifier threshold for slot rescue")
     ap.add_argument("--out", default=None, help="directory for align_veto.md/json (default: the verifier run or runs/)")
     args = ap.parse_args(argv)
-    res = run(args.verifier_run, args.rules_run, args.table)
+    res = run(args.verifier_run, args.rules_run, args.table, args.theta)
     out = args.out or args.verifier_run or os.path.join(ROOT, "runs")
     md = to_markdown(res)
     with open(os.path.join(out, "align_veto.md"), "w", encoding="utf-8") as fh:

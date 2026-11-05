@@ -147,3 +147,44 @@ def test_alignment_roles_and_slots_with_a_toy_table(tmp_path):
     assert a["ok"] and a["spans"] == [(0, 3), (3, 4), (4, 7)]
     assert a["roles"][0] == "phon" and a["roles"][1] == "compl"      # O1 writes pr, D21 complements r
     assert a["slots"] == [2, 6]                                        # D54 after pr; N1 redundant after p.t
+
+
+def test_jsesh_table_keeps_phonogram_values_only():
+    from egydet.rules.align import DEFAULT_TABLE, load_table
+    t = load_table(DEFAULT_TABLE)
+    assert "pr" in t["O1"] and "tA" in t["N16"] and "n" in t["N35"]
+    assert "i" not in t.get("A1", [])                      # the suffix-pronoun value is typed ideogram
+    assert "i" in load_table(DEFAULT_TABLE, types=None)["A1"]
+
+
+def test_frozen_pipeline_runs_in_fake_mode(tmp_path):
+    from egydet import pipeline
+    from egydet.scoring.params import preset
+    frozen = {"name": "test", "created": "now", "rules": {"params": preset("default")},
+              "veto": {"table": "kb/jsesh_sign_values.json", "types": ["phonogram"]},
+              "verifier": {"model": "fake-model", "prompt": "verifier_v1", "condition": "context"},
+              "rescue": {"theta": 0.5}}
+    recs = load_gold(GOLD)[:3]
+    import egydet.agents.client as client_mod
+    orig = client_mod.ChatClient.__init__
+
+    def init(self, model, mode="live", cache=None, stats=None, fake_answer=None, **kw):
+        def fake(req):
+            n = sum(1 for line in req["messages"][1]["content"].splitlines() if line[:1].isdigit() and ": " in line)
+            return json.dumps({"judgements": [{"index": i, "sign": "?", "probability": 0.9, "reason": ""}
+                                              for i in range(n)]})
+        orig(self, model, mode=mode, cache=cache, stats=stats, fake_answer=fake, **kw)
+    client_mod.ChatClient.__init__ = init
+    try:
+        pipeline.predict(recs, frozen, "fake", str(tmp_path))
+    finally:
+        client_mod.ChatClient.__init__ = orig
+    out = [json.loads(l) for l in (tmp_path / "predictions.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert len(out) == 3
+    for o in out:
+        ev = o["evidence"]
+        assert set(o["det_idx"]) == (set(ev["rules"]) - set(ev["vetoed"])) | set(ev["rescued"])
+        assert set(ev["rescued"]) <= set(ev["slots"])
+    assert pipeline.write_review_sheet(str(tmp_path)).endswith("proposals.xlsx")
+    res = pipeline.evaluate(str(tmp_path), GOLD)
+    assert res["n"] == 3

@@ -30,7 +30,12 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 from egydet.kb import ROOT
 
-DEFAULT_TABLE = os.path.join(ROOT, "kb", "private", "mdc_phonetic_values.json")
+# JSesh sign values (S. Rosmorduc, CC-BY 4.0; built by tools/parse_jsesh_signs.py). Only phonogram values
+# are used: the veto is about signs that write sounds; JSesh types A1 = i (suffix pronoun) as an ideogram,
+# and with it the alignment removes most A1 determinatives. Note that JSesh also types some logogram
+# readings as phonograms (A40 nTr, F51 Haw, D54 iw).
+DEFAULT_TABLE = os.path.join(ROOT, "kb", "jsesh_sign_values.json")
+DEFAULT_TYPES = ("phonogram",)
 _TO_MDC = {"ꜣ": "A", "ꞽ": "i", "ı͗": "i", "j": "i", "ꜥ": "a", "ḥ": "H", "ḫ": "x", "ẖ": "X", "š": "S", "ṯ": "T",
            "ḏ": "D", "z": "s", "ḳ": "q"}
 _PHONEMES = set("AiyawbpfmnrhHxXsSqkgtTdD")
@@ -43,9 +48,14 @@ SIGN_NONE_INNER = 0.8       # an unexplained sign inside a word is expensive
 EMPTY_WORD = 0.6            # per letter of a word that gets no sign (lost or restored text)
 
 
-def load_table(path: str = DEFAULT_TABLE, extra: Optional[Dict[str, List[str]]] = None) -> Dict[str, List[str]]:
+def load_table(path: str = DEFAULT_TABLE, extra: Optional[Dict[str, List[str]]] = None,
+               types: Optional[Sequence[str]] = DEFAULT_TYPES) -> Dict[str, List[str]]:
+    """``types`` filters by value type when the file records types (JSesh); None keeps every value."""
     with open(path, encoding="utf-8") as fh:
-        raw = json.load(fh)["values"]
+        data = json.load(fh)
+    raw = data["values"]
+    if types is not None and "types" in data:
+        raw = {k: [v for v, t in zip(vs, data["types"].get(k, [])) if t in types] for k, vs in raw.items()}
     table: Dict[str, List[str]] = {}
     for code, vals in list(raw.items()) + list((extra or {}).items()):
         out = table.setdefault(code, [])

@@ -17,7 +17,7 @@ Dataset archive: [10.5281/zenodo.21776840](https://doi.org/10.5281/zenodo.217768
 | `data/raw/` | Corpus (533 MdC sequences with transliteration and translation) and the expert annotations of 99 sequences (determinatives marked in bold) |
 | `data/gold/gold_v1.jsonl` | Same 99 annotations in machine-readable form, with the token position of every determinative (built by `python -m egydet.gold.build`) |
 | `data/splits/v147_seed42.json` | The outer 5-fold and inner 5x2 cross-validation splits used for the manuscript, by sequence id |
-| `kb/` | Knowledge base (sign entries, sign categories, semantic fields) as YAML |
+| `kb/` | Knowledge base (sign entries, sign categories, semantic fields) as YAML; `jsesh_sign_values.json`: sign transliterations extracted from JSesh (S. Rosmorduc, `signs_description.xml`, CC-BY 4.0) |
 | `docs/diagrams/` | Architecture and workflow diagrams |
 | `legacy/v1_28_initial_github/` | The script previously published in this repository (superseded) |
 | `configs/`, `src/egydet/`, `tests/` | Modular v2 implementation (in progress; the rule-only path is complete and reproduces v1.47) |
@@ -54,7 +54,8 @@ python legacy/v1_47_paper/repro_rule_path.py fold1      # ~3 min, runs Optuna fo
 
 ## Status
 
-The v1.47 code is frozen at tag `v1.47-paper`. Further development happens in the modular v2 package.
+The v1.47 code is frozen at tag `v1.47-paper`. Further development happens in the modular v2 package;
+the v2 pipeline and its evaluation protocol are described in `docs/pipeline_frozen_v2.md`.
 
 ```bash
 pip install -e ".[dev]"
