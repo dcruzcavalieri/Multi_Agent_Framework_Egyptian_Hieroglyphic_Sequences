@@ -1,0 +1,142 @@
+{
+ "name": "frozen_v2",
+ "created": "2026-11-05T17:14:44",
+ "git": "ff88619dcf2dc03dfcf07cf177eb7fb3671a1d27",
+ "setting": "annotation assistant: MdC + experts' transliteration and translation",
+ "rules": {
+  "objective": "legacy_micro_signs",
+  "n_trials": 400,
+  "trained_on": "gold_v1 (99 sequences)",
+  "gold_sha1": "569e861c0864f48296ccfaabde5e3eb3457cf7a4",
+  "params": {
+   "w_sem": 0.5051218341360871,
+   "w_struct": 0.7544685130838638,
+   "w_rule": 0.13753790064360502,
+   "w_sem_llm": 0.0,
+   "w_struct_llm": 0.0,
+   "w_rule_llm": 1.0,
+   "bonus_2src": 0.16563928851910897,
+   "bonus_3src": 0.021207931564200422,
+   "bonus_final": 0.12467426340341782,
+   "bonus_global_final": 0.02932261012239721,
+   "bonus_near_end": 0.11212079839052069,
+   "bonus_group_end": 0.07064962750123455,
+   "bonus_reliable": 0.1131103303507785,
+   "bonus_plural_marker": 0.14175277360449665,
+   "bonus_plural_head": 0.16800846310653791,
+   "bonus_strong_det": 0.17797797771048285,
+   "penalty_phonogram_primary_mult": 0.6198918484503771,
+   "penalty_phonetic_complement": 0.1284720837342487,
+   "penalty_phonogram_nonfinal": 0.19879006698414298,
+   "penalty_no_context_mult": 0.9220456671116641,
+   "context_strength_boost": 0.3295581787749384,
+   "penalty_recently_critical": 0.351722220981538,
+   "penalty_recently_minor": 0.961380739889538,
+   "penalty_recently_other": 0.8884203779988977,
+   "penalty_contextual_span": 0.4447465698617397,
+   "bonus_plural_span": 0.08553607481932153,
+   "bonus_location_span": 0.07119500737115998,
+   "bonus_location_modifier_span": 0.10646381189407324,
+   "bonus_strong_det_span": 0.07802966216722572,
+   "thresh_default_context": 0.7548936734858421,
+   "thresh_W24": 0.8054554671309744,
+   "thresh_W22": 0.5796161354092532,
+   "thresh_W23": 0.889231610068701,
+   "thresh_R8": 0.9274049636914808,
+   "thresh_R7": 0.9372893777351687,
+   "thresh_D4": 0.5179246558785175,
+   "thresh_F4": 0.516211374441286,
+   "thresh_K1": 0.9056931705354039,
+   "thresh_X1": 0.943040469696125,
+   "thresh_I9": 0.9241801157239842,
+   "thresh_I10": 0.829986964178985,
+   "thresh_L1": 0.7026079168122273,
+   "thresh_L2": 0.8657840850582168,
+   "thresh_I5": 0.5279700408389778,
+   "thresh_I6": 0.6922566789800282,
+   "thresh_D58": 0.5738150030324927,
+   "thresh_D56": 0.6125716520793536,
+   "thresh_U1": 0.6295289225498681,
+   "thresh_U6": 0.7257319951717599
+  },
+  "chosen": "rep2_AB",
+  "inner": [
+   {
+    "label": "rep1_AB",
+    "opt": 0.901840490797546,
+    "val": 0.9131832797427653
+   },
+   {
+    "label": "rep1_BA",
+    "opt": 0.9131832797427653,
+    "val": 0.901840490797546
+   },
+   {
+    "label": "rep2_AB",
+    "opt": 0.8805031446540881,
+    "val": 0.9341692789968652
+   },
+   {
+    "label": "rep2_BA",
+    "opt": 0.9341692789968652,
+    "val": 0.8805031446540881
+   },
+   {
+    "label": "rep3_AB",
+    "opt": 0.901840490797546,
+    "val": 0.9131832797427653
+   },
+   {
+    "label": "rep3_BA",
+    "opt": 0.9131832797427653,
+    "val": 0.901840490797546
+   },
+   {
+    "label": "rep4_AB",
+    "opt": 0.903010033444816,
+    "val": 0.9112426035502958
+   },
+   {
+    "label": "rep4_BA",
+    "opt": 0.9112426035502958,
+    "val": 0.903010033444816
+   },
+   {
+    "label": "rep5_AB",
+    "opt": 0.9114754098360656,
+    "val": 0.9036144578313253
+   },
+   {
+    "label": "rep5_BA",
+    "opt": 0.9036144578313253,
+    "val": 0.9114754098360656
+   }
+  ]
+ },
+ "veto": {
+  "table": "kb/jsesh_sign_values.json",
+  "types": [
+   "phonogram"
+  ]
+ },
+ "verifier": {
+  "model": "gpt-6-luna",
+  "prompt": "verifier_v1",
+  "condition": "context"
+ },
+ "rescue": {
+  "theta": 0.5
+ },
+ "fingerprint": {
+  "kb/signs.yaml": "407864b1b1cb4094a64fbbcf2ffaed6eaa8e56d8",
+  "kb/categories.yaml": "ae8d20e194cdd401ed506493b5d69b7c8b8b6094",
+  "kb/jsesh_sign_values.json": "3b0aa7d4bc49d41ad6f0c97ebc4be8615400fd99",
+  "src/egydet/agents/prompts/verifier_v1.md": "fabdb1644a1d6dc9e0121fbf44fd98cbb0171259",
+  "src/egydet/rules/align.py": "e710325dd3cf9138bbd76e824a2f373b44188d2f",
+  "src/egydet/rules/structure.py": "e558e3a108c7631eb46aa7b7fd22d745d510585d",
+  "src/egydet/rules/baseline.py": "1e5149028d33201ec413e5ff3b52414132dec2e1",
+  "src/egydet/scoring/scorer.py": "4347be9ea34f869067b95898983ea94ea21d5cb5",
+  "src/egydet/scoring/params.py": "2f76e3acf712013b483c22f4888f147102e69d59",
+  "src/egydet/pipeline.py": "f441a1f26335a4a82832e74d796ba6d23e49896a"
+ }
+}
