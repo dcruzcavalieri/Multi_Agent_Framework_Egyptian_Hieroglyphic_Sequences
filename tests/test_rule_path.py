@@ -151,3 +151,14 @@ def test_default_params_test_scores_per_fold(kb):
                                   samples[i].gold_idx) for i in f["test"]]
         got.append(round(aggregate(scores)["macro"]["f1"], 4))
     assert got == [0.8038, 0.8974, 0.9019, 0.8239, 0.8651]
+
+
+def test_ranked_selection_starts_with_the_main_set(kb):
+    from egydet.scoring.scorer import select_ranked
+    for r in load_gold(os.path.join(ROOT, "data", "gold", "gold_v1.jsonl")):
+        st = build_structure(r["mdc"], kb.block_end_signs, kb.plural_markers)
+        pool = rule_candidates(st, kb)
+        for p in (preset("default"), preset("flat")):
+            ranked = select_ranked(st, pool, p, kb, beam_width=10, k=4)
+            assert ranked[0][1] == sorted(select(st, pool, p, kb)), r["id"]
+            assert len({tuple(s) for _, s in ranked}) == len(ranked)

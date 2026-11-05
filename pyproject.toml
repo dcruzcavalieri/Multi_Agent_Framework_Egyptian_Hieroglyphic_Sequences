@@ -17,12 +17,17 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+# needed to run the frozen v1.47 agents through egydet.legacy_bridge (Phase 1)
+legacy = ["matplotlib", "langgraph", "langchain-core", "langchain-openai", "langchain-anthropic", "python-dotenv"]
 
 [project.scripts]
 egydet-gold = "egydet.gold.build:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"egydet.agents" = ["prompts/*.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

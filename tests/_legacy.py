@@ -21,7 +21,8 @@ def load_v147(*names: str, constants: tuple = ()) -> dict:
             keep.append(node)
         elif isinstance(node, ast.For) and "PARAM_SPACE" in constants and "CONTEXT_SIGNS_TO_OPTIMIZE" in ast.unparse(node.iter):
             keep.append(node)
+    import json
     import typing
-    ns = {"re": re, **{n: getattr(typing, n) for n in ("List", "Dict", "Any", "Tuple", "Optional", "Set")}}
+    ns = {"re": re, "json": json, **{n: getattr(typing, n) for n in ("List", "Dict", "Any", "Tuple", "Optional", "Set")}}
     exec(compile(ast.Module(body=keep, type_ignores=[]), V147, "exec"), ns)
     return ns

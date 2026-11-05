@@ -143,3 +143,36 @@ def select(st: Structure, pool: Dict[int, Candidate], p: Mapping[str, float], kb
         new_beam.sort(key=lambda x: -x[0])
         beam = new_beam[:beam_width]
     return beam[0][1] if beam else []
+
+
+def select_ranked(st: Structure, pool: Dict[int, Candidate], p: Mapping[str, float], kb: KnowledgeBase,
+                  beam_width: int = 10, k: int = 4) -> List[Tuple[float, List[int]]]:
+    """Up to ``k`` distinct determinative sets from the final beam, best first (main + alternatives).
+
+    Same search as ``select`` with a wider beam; spans with zero score are skipped (they would only
+    produce copies of a set plus signs without evidence), and sets are deduplicated by their indices.
+    """
+    occ = {i: score_candidate(c, st.signs, p, kb) for i, c in pool.items()}
+    beam = [(0.0, [])]
+    never = kb.never_determinative
+    for cands in st.span_candidates:
+        new_beam = []
+        for score, dets in beam:
+            for span in cands:
+                sp = () if any(st.signs[i] in never for i in span) else span
+                gain = score_span(sp, st.signs, occ, p, kb)
+                if sp and gain <= 0.0:
+                    continue        # a span without evidence only duplicates the empty choice
+                new_beam.append((score + gain, dets + list(sp)))
+        new_beam.sort(key=lambda x: -x[0])
+        beam = new_beam[:beam_width]
+    out, seen = [], set()
+    for score, dets in beam:
+        key = tuple(sorted(dets))
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append((score, sorted(dets)))
+        if len(out) >= k:
+            break
+    return out

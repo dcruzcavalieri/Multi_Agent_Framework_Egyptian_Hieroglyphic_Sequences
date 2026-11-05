@@ -6,3 +6,4 @@ runs/
 .cache/
 *.egg-info/
 .ipynb_checkpoints/
+kb/private/
